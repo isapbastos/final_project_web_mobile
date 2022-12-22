@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Cadastro
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="./assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="./assets/demo/demo.css" rel="stylesheet" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">	
+		
+		$(document).ready(function () {
+			$.getJSON('./assets/estados_cidades.json', function (data) {
+				var items = [];
+				var options = '<option value="">Escolha um estado</option>';	
+				$.each(data, function (key, val) {
+					options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+				});					
+				$("#estados").html(options);				
+				
+				$("#estados").change(function () {				
+				
+					var options_cidades = '';
+					var str = "";					
+					
+					$("#estados option:selected").each(function () {
+						str += $(this).text();
+					});
+					
+					$.each(data, function (key, val) {
+						if(val.nome == str) {							
+							$.each(val.cidades, function (key_city, val_city) {
+								options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+							});							
+						}
+					});
+					$("#cidades").html(options_cidades);	
+				}).change();		
+			});
+		});
+	</script>	
+</head>
+<body>
+	<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <div class="navbar-translate">
+					<a class="navbar-brand" href="/welcome">
+						<i class="material-icons">arrow_back</i> 
+						Voltar </a>
+				</div>
+      </div>
+			<div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="/logout"  class="nav-link" title="Sair">
+              <i class="material-icons">logout</i> Sair
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+	<div class="section section-signup  page-header header-filter clear-filter purple-filter" style="background-image: url('./assets/img/bg-profile-in-basic.jpg');">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 mx-auto">
+					<div class="card card-login">
+						<form class="form" action="/edit" method="POST">
+							<div class="card-header card-header-primary text-center">
+								<h4 class="card-title">Edite seus dados pessoais</h4>
+							</div>
+							<div class="card-body">
+								<br>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="material-icons" style="color: rgb(0, 200, 255);">person</i>
+										</span>
+									</div>
+									<input type="text" name="name" style="background-color: azure; color: black;" class="form-control" placeholder=" <%= user.name %>">
+								</div>
+								<br>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="material-icons" tooltip="" style="color: rgb(0, 200, 255);">house</i>
+										</span>
+									</div>
+										<select class="form-control" id="estados" name="uf">
+											<option value=""></option>
+										</select>
+										<select class="form-control" id="cidades" name="city">
+										</select>
+								</div>
+								<br>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="material-icons" style="color: rgb(0, 200, 255);">smartphone</i>
+										</span>
+									</div>
+									<input type="text" name="telephone" style="background-color: azure; color: black;" class="form-control" placeholder=" <%= user.telephone %>">
+									</div>
+									<div class="input-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="material-icons" style="color: rgb(0, 200, 255);">face</i>
+												</span>
+											</div>
+											<textarea maxlength="120" type="text" id="description" name="description" style="background-color: azure; color: black;"  class="form-control" autocomplete=""><%= user.description %>
+											</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="footer text-center">
+									<button class="btn btn-raised" style="background-color: rgb(0, 72, 255);" type="submit">
+										Salvar
+									</button>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

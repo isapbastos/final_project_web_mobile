@@ -1,0 +1,16 @@
+Modificar no Banco de dados:
+->city e UF separados
+->colocar array de mensagens:
+menssagesList: 
+[
+	{
+		idUser: ObjectID
+		menssages: [
+			date: dateTime(),
+			message: String
+		]
+	}
+]
+
+ToDo: imagem do usuário
+

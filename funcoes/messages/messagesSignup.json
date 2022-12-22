@@ -1,0 +1,6 @@
+{
+	"MSG_ERROR_SIGNUP": "Ops... houve um problema com a sua autenticaçao. Tente novamente",
+	"MSG_INVALID_PASSWORD": "Ops... as senhas devem ter no mínimo 6 caracteres e devem ser iguais.",
+	"MSG_INVALID_USER": "O usuário já está cadastrado, volte a página de login e entre na sua conta. ",
+	"MSG_SUCCESS_SIGNUP": "Parabéns! Seu cadastro foi realizado com sucesso, agora você já pode fazer login na sua conta."
+}
